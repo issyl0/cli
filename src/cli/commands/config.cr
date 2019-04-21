@@ -4,6 +4,8 @@ class Commands::Config < Admiral::Command
   define_argument option
   define_argument value
 
+  CONFIG_FILE = "#{ENV["HOME"]}/issyl0-config.yml"
+
   def run
     if arguments.value
       if %w(email repo_base_path).includes?(arguments.option)
@@ -17,7 +19,14 @@ class Commands::Config < Admiral::Command
   end
 
   def write_data_to_config_file(option, value)
-    config_file = "#{ENV["HOME"]}/issyl0-config.yml"
-    File.write(config_file, "#{option}: #{value}\n", mode: "a")
+    File.write(CONFIG_FILE, "#{option}: #{value}\n", mode: "a")
+  end
+
+  def self.retrieve_value(value)
+    if File.exists?(CONFIG_FILE)
+      YAML.parse(File.read(CONFIG_FILE))[value].as_s
+    else
+      puts "Create a config file with some data first. Run `issyl0 config`."
+    end
   end
 end
