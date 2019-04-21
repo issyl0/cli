@@ -1,0 +1,17 @@
+name: cli
+version: 0.1.0
+
+authors:
+  - Isabell (Issy) Long <me@issyl0.co.uk>
+
+dependencies:
+  admiral:
+    github: jwaldrip/admiral.cr
+
+targets:
+  cli:
+    main: src/cli.cr
+
+crystal: 0.27.2
+
+license: MIT
