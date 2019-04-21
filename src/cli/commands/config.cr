@@ -22,9 +22,9 @@ class Commands::Config < Admiral::Command
     File.write(CONFIG_FILE, "#{option}: #{value}\n", mode: "a")
   end
 
-  def self.retrieve_value(value)
+  def self.retrieve_value(option)
     if File.exists?(CONFIG_FILE)
-      YAML.parse(File.read(CONFIG_FILE))[value].as_s
+      YAML.parse(File.read(CONFIG_FILE))[option].as_s
     else
       puts "Create a config file with some data first. Run `issyl0 config`."
     end
