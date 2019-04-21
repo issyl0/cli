@@ -9,7 +9,11 @@ class Commands::Config < Admiral::Command
   def run
     if arguments.value
       if %w(email repo_base_path).includes?(arguments.option)
-        write_data_to_config_file(arguments.option, arguments.value)
+        if !self.class.retrieve_value(arguments.option)
+          write_data_to_config_file(arguments.option, arguments.value)
+        else
+          puts "Config option #{arguments.option} already exists. Edit #{CONFIG_FILE} to change its value."
+        end
       else
         puts "Available config options are `email` or `repo_base_path`."
       end
