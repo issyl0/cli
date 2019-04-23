@@ -1,26 +1,25 @@
 require "yaml"
 
 class Commands::Config < Admiral::Command
-  define_argument option
-  define_argument value
+  define_argument option, required: true
+  define_argument value, required: true
   define_help
 
   CONFIG_FILE = "#{ENV["HOME"]}/issyl0-config.yml"
 
   def run
-    if arguments.value
-      if %w(email repo_base_path).includes?(arguments.option)
-        if !self.class.retrieve_value(arguments.option)
-          write_data_to_config_file(arguments.option, arguments.value)
-        else
-          puts "Config option #{arguments.option} already exists. Edit #{CONFIG_FILE} to change its value."
-        end
+    if %w(email repo_base_path).includes?(arguments.option)
+      if !self.class.retrieve_value(arguments.option)
+        write_data_to_config_file(arguments.option, arguments.value)
       else
-        puts "Available config options are `email` or `repo_base_path`."
+        puts "Config option #{arguments.option} already exists. Edit #{CONFIG_FILE} to change its value."
       end
     else
-      puts "You must specify a value for your config option."
+      puts "Available config options are `email` or `repo_base_path`."
     end
+  end
+
+  def exit
   end
 
   def write_data_to_config_file(option, value)

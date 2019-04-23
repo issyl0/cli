@@ -1,5 +1,5 @@
 class Commands::SyncFork < Admiral::Command
-  define_argument repo
+  define_argument repo, required: true
   define_help
 
   def run
