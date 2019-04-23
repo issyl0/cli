@@ -1,5 +1,5 @@
 class Commands::Links < Admiral::Command
-  define_argument command, required: true
+  define_argument command
   define_argument destination
   define_help
 
@@ -19,7 +19,7 @@ class Commands::Links < Admiral::Command
   @url = ""
 
   def run
-    if destination_exists? && %w(show open).includes?(arguments.command)
+    if arguments.destination && arguments.command && destination_exists? && %w(show open).includes?(arguments.command)
         # MacOS: Open the URL in a web browser.
         Process.run("open", [@url]) if arguments.command == "open"
         # Print the URL to stdout, for use in `pbcopy` etc.

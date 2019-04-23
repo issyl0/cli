@@ -3,10 +3,6 @@ require "../cli"
 require "./commands/*"
 
 class Issyl0::CLI::Main < Admiral::Command
-  rescue_from Admiral::Error do |e|
-    panic e.message.colorize(:red)
-  end
-
   define_version "0.0.1"
   define_help
 
