@@ -19,9 +19,6 @@ class Commands::Config < Admiral::Command
     end
   end
 
-  def exit
-  end
-
   def write_data_to_config_file(option, value)
     File.write(CONFIG_FILE, "#{option}: #{value}\n", mode: "a")
   end
