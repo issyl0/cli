@@ -1,5 +1,6 @@
 class Commands::SyncFork < Admiral::Command
   define_argument repo
+  define_help
 
   def run
     if %w(brew core cask).includes?(arguments.repo)

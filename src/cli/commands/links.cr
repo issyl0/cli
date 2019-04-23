@@ -1,6 +1,7 @@
 class Commands::Links < Admiral::Command
   define_argument command
   define_argument destination
+  define_help
 
   LINKS = [
     {

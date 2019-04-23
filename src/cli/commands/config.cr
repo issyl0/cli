@@ -3,6 +3,7 @@ require "yaml"
 class Commands::Config < Admiral::Command
   define_argument option
   define_argument value
+  define_help
 
   CONFIG_FILE = "#{ENV["HOME"]}/issyl0-config.yml"
 
