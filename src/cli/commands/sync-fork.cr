@@ -10,7 +10,12 @@ class Commands::SyncFork < Admiral::Command
   end
 
   def sync_fork(repo)
-    repo_dir = "#{Commands::Config.retrieve_value("repo_base_path")}/osc/dev-homebrew/#{repo}"
+    if base_path = Commands::Config.retrieve_value("repo_base_path")
+      repo_dir = "#{base_path}/osc/dev-homebrew/#{repo}"
+    else
+      puts "Run `issyl0 config repo_base_path <value>` then try again."
+      exit(1)
+    end
 
     puts "Checking out master..."
     checkout_master = Process.run("git", ["checkout", "master"], chdir: repo_dir)
