@@ -3,7 +3,7 @@ require "../cli"
 require "./commands/*"
 
 class Issyl0::CLI::Main < Admiral::Command
-  define_version "0.0.1"
+  define_version "1.0.0"
   define_help
 
   register_sub_command "config", Commands::Config
