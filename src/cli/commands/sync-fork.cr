@@ -18,6 +18,9 @@ class Commands::SyncFork < Admiral::Command
       exit(1)
     end
 
+    puts "Stashing local changes..."
+    stash_local_changes = Process.run("git", ["stash"], chdir: repo_dir)
+
     puts "Checking out master..."
     checkout_master = Process.run("git", ["checkout", "master"], chdir: repo_dir)
 
