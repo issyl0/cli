@@ -7,10 +7,10 @@ class Commands::SyncFork < Admiral::Command
   define_help
 
   def run
-    if %w(brew core cask).includes?(arguments.repo)
+    if %w(brew hcore lcore cask).includes?(arguments.repo)
       sync_fork(arguments.repo, flags.no_push)
     else
-      puts "Supported repos are 'brew', 'core' or 'cask'."
+      puts "Supported repos are 'brew', 'hcore', 'lcore' or 'cask'."
     end
   end
 
