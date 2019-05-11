@@ -10,10 +10,15 @@ class Commands::Links < Admiral::Command
       "url"         => "http://172.16.0.75:32400"
     },
     {
-      "name"        => "concourse",
+      "name"        => "home-concourse",
       "description" => "Concourse, from home network.",
       "url"         => "http://172.16.0.75:8080"
     },
+    {
+      "name"        => "concourse",
+      "description" => "Concourse, for Homebrew.",
+      "url"         => "https://concourse.infra.issyl0.co.uk"
+    }
   ]
 
   @url = ""
