@@ -20,8 +20,16 @@ class Commands::Links < Admiral::Command
 
   def run
     if arguments.destination && arguments.command && destination_exists? && %w(show open).includes?(arguments.command)
-        # MacOS: Open the URL in a web browser.
-        Process.run("open", [@url]) if arguments.command == "open"
+        if arguments.command == "open"
+          if %w(procyon).includes?(System.hostname)
+            Process.run("open", [@url])
+          elsif %w(grus).includes?(System.hostname)
+            Process.run("xdg-open", [@url])
+          elsif %w(rho sky).includes?(System.hostname)
+            puts "These machines don't have web browsers installed."
+            exit(1)
+          end
+        end
         # Print the URL to stdout, for use in `pbcopy` etc.
         puts @url if arguments.command == "show"
     else
